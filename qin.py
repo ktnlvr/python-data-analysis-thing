@@ -97,11 +97,9 @@ print(df.max(numeric_only=True))
 ### 📈 Variance and Standard Deviation
 
 
-### 📊 Distribution Shapes
-
-
 ## 📊 4.Visualising Relationships
 
+### 📊 4.1 Distribution Shapes
 
 column_name = 'impact_confidentiality'
 
@@ -123,3 +121,18 @@ plt.title(f"Histogram of {column_name}")
 plt.xlabel(column_name)
 plt.ylabel("Frequency")
 plt.show()
+
+# Summary:
+# The histogram shows the distribution of the impact_confidentiality values in our dataset.
+#
+# We also calculated key descriptive statistics:
+#
+# - The mean value of approximately 0.8659 indicates the average confidentiality values in the dataset.
+# - The variance of 0.5085 tells us how spread out the values are — specifically, it’s the average of the squared differences from the mean.
+# - The standard deviation of 0.7131 shows that most of the confidentiality values are within ±0.7131 units of the mean —
+# a more interpretable measure than variance since it shares the same units as the data.
+# - The histogram is asymmetric and slightly skewed, suggesting that the distribution is not perfectly normal.
+# - There's a wide spread in the values, ranging from slightly below 15000 to above 40000.
+
+
+### 📦 4.2 Outliers in Boxplots
