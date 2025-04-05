@@ -108,3 +108,7 @@ print(df.max(numeric_only=True))
 ### 📈 Variance and Standard Deviation
 
 
+### 📊 Distribution Shapes
+
+
+## 📊 Visualizing Relationships
