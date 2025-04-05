@@ -37,7 +37,15 @@ print("Missing Data Count:\n", missing_counts)
 ## **3. Probability Distribution & Descriptive Stats**
 ### 🎯 Expected Value (Mean)
 
-
+# The McCumber Cube is a model framework created by John McCumber in 1991 to
+# help organizations establish and evaluate information security initiatives
+# by considering all of the related factors that impact them.
+# This security model has three dimensions:
+# The foundational principles for protecting information systems.
+# 1.availability, 2.integrity, 3.Confidentiality ✅
+# The protection of information in each of its possible states.
+# The security measures used to protect data.
+#
 
 # Convert the 'access_complexity' column to a list
 access_complexity_list = df['access_complexity'].tolist()
