@@ -1,5 +1,6 @@
 # %%
 import pandas as pd
+from matplotlib import pyplot as plt
 from scipy import stats
 import numpy as np
 import plotly.express as px
@@ -28,6 +29,25 @@ df.mod_date = pd.to_datetime(df.mod_date)
 df.pub_date = pd.to_datetime(df.pub_date)
 
 df.info() 
+non_par_com = {"NONE": 0, "COMPLETE": 2, "PARTIAL": 1}
+low_med_hih = {"LOW": 0, "MEDIUM": 1, "HIGH": 2}
+non_sin_mul = {"NONE": 0, "SINGLE": 1, "MULTIPLE": 2}
+loc_adj_net = {"LOCAL": 0, "ADJACENT_NETWORK": 1, "NETWORK": 2}
+
+ordinal_remapping = {
+    "access_authentication": non_sin_mul,
+    "access_complexity": low_med_hih,
+    "access_vector": loc_adj_net,
+    "impact_availability": non_par_com,
+    "impact_confidentiality": non_par_com,
+    "impact_integrity": non_par_com,
+}
+
+for ordinal_column in ordinal_remapping:
+    df[ordinal_column] = df[ordinal_column].apply(
+        lambda v: ordinal_remapping[ordinal_column].get(v, v)
+    )
+
 
 ## 🧼 2. Handling Missing Data
 
@@ -47,28 +67,6 @@ print("Missing Data Count:\n", missing_counts)
 # The security measures used to protect data.
 #
 
-# Convert the 'access_complexity' column to a list
-access_complexity_list = df['access_complexity'].tolist()
-
-# Unique access_complexity
-unique_access_complexity = list(set(access_complexity_list))
-print("\nUnique access_complexity:", unique_access_complexity)
-
-# Unique impact_availability
-access_impact_availability = df['impact_availability'].tolist()
-unique_impact_availability = list(set(access_impact_availability))
-print("\nUnique impact_availability:", unique_impact_availability)
-
-# Unique impact_confidentiality
-access_impact_confidentiality = df['impact_confidentiality'].tolist()
-unique_impact_confidentiality = list(set(access_impact_confidentiality))
-print("\nUnique impact_confidentiality:", unique_impact_confidentiality)
-
-# Unique impact_integrity
-access_impact_integrity  = df['impact_integrity'].tolist()
-unique_impact_integrity  = list(set(access_impact_integrity ))
-print("\nUnique impact_integrity:", unique_impact_integrity )
-
 # Min and Max of DataFrame columns
 print("Minimum values in each column:")
 print(df.min(numeric_only=True))
@@ -84,23 +82,6 @@ print(f"\nGeometric Mean of cvss: {geometric_mean_cvss:.2f}")
 # Calculate the geometric mean of cwe_code
 geometric_mean_cwe_code = stats.gmean(df["cwe_code"].dropna())
 print(f"\nGeometric Mean of cwe_code: {geometric_mean_cwe_code:.2f}")
-
-
-# Min and Max of DataFrame columns
-print("Minimum values in each column:")
-print(df.min(numeric_only=True))
-
-print("\nMaximum values in each column:")
-print(df.max(numeric_only=True))
-
-
-
-# Geometric Mean
-# Calculate the geometric mean of cvss
-geometric_mean_cvss = stats.gmean(df["cvss"].dropna())
-print(f"\nGeometric Mean of cvss: {geometric_mean_cvss:.2f}")
-
-
 
 
 # %%
@@ -119,4 +100,26 @@ print(df.max(numeric_only=True))
 ### 📊 Distribution Shapes
 
 
-## 📊 Visualizing Relationships
+## 📊 4.Visualising Relationships
+
+
+column_name = 'impact_confidentiality'
+
+# Drop NaN values just in case
+clean_impact_confidentiality = df[column_name].dropna()
+
+# Mean, Variance, and Standard Deviation
+mean_val = np.mean(clean_impact_confidentiality)
+var_val = np.var(clean_impact_confidentiality, ddof=1)     # sample variance
+std_val = np.std(clean_impact_confidentiality, ddof=1)     # sample standard deviation
+
+print(f"Mean (Expected Value): {mean_val:.4f}")
+print(f"Variance: {var_val:.4f}")
+print(f"Standard Deviation: {std_val:.4f}")
+
+# Visualize distribution
+plt.hist(clean_impact_confidentiality, bins=30)
+plt.title(f"Histogram of {column_name}")
+plt.xlabel(column_name)
+plt.ylabel("Frequency")
+plt.show()
