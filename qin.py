@@ -28,6 +28,18 @@ df.pub_date = pd.to_datetime(df.pub_date)
 
 df.info() 
 
+## 🧼 2. Handling Missing Data
+
+missing_counts = df.isnull().sum()
+print("Missing Data Count:\n", missing_counts)
+
+## **3. Probability Distribution & Descriptive Stats**
+
+### 🎯 Expected Value (Mean)
+
+
+
+
 # %%
 
 # Min and Max of DataFrame columns
