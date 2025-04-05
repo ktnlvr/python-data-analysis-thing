@@ -85,7 +85,6 @@ print(f"\nGeometric Mean of cvss: {geometric_mean_cvss:.2f}")
 geometric_mean_cwe_code = stats.gmean(df["cwe_code"].dropna())
 print(f"\nGeometric Mean of cwe_code: {geometric_mean_cwe_code:.2f}")
 
-from scipy import stats
 
 # Min and Max of DataFrame columns
 print("Minimum values in each column:")
