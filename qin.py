@@ -1,5 +1,6 @@
 # %%
 import pandas as pd
+from scipy import stats
 import numpy as np
 import plotly.express as px
 import kagglehub
@@ -36,7 +37,7 @@ print("Missing Data Count:\n", missing_counts)
 ## **3. Probability Distribution & Descriptive Stats**
 ### 🎯 Expected Value (Mean)
 
-from scipy import stats
+
 
 # Convert the 'access_complexity' column to a list
 access_complexity_list = df['access_complexity'].tolist()
