@@ -103,4 +103,8 @@ print(df.min(numeric_only=True))
 
 print("\nMaximum values in each column:")
 print(df.max(numeric_only=True))
+
 # %%
+### 📈 Variance and Standard Deviation
+
+
