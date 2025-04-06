@@ -222,9 +222,35 @@ visualize_outliers(df)
 
 # %%
 ## 🔗 5. Analysing Correlation Between Variables
+
+# Covariance Analysis
+
+# Calculate a 30-day rolling mean to smooth out short-term fluctuations
+df['rolling_mean'] = df['value'].rolling(window=30).mean()
+
+# Remove rows with NaN values introduced by the rolling window
+df_clean = df.dropna()
+
+# Calculate the covariance matrix between the original values and their rolling mean
+cov_matrix = df_clean[['value', 'rolling_mean']].cov()
+
+# Display the covariance matrix
+print("\nCovariance Matrix:")
+print(cov_matrix)
+
+# Visualize the covariance matrix using a heatmap
+plt.figure(figsize=(6, 4))
+sns.heatmap(cov_matrix, annot=True, cmap="coolwarm", center=0)
+
+# Add plot title
+plt.title("Covariance Matrix Heatmap")
+
+# Show the plot
+plt.show()
+
+
 # Calculate correlation matrices using different methods:
 
-df_clean = df.dropna()
 pearson_corr = df_clean.corr(method='pearson') # - Pearson: linear correlation (assumes normality)
 spearman_corr = df_clean.corr(method='spearman') # - Spearman: rank-based correlation (monotonic relationships)
 kendall_corr = df_clean.corr(method='kendall') # - Kendall: rank correlation (more robust with small samples or ties)
