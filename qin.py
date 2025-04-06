@@ -1,5 +1,6 @@
 # %%
 import pandas as pd
+from holoviews.ipython import display
 from matplotlib import pyplot as plt
 from scipy import stats
 import numpy as np
@@ -7,6 +8,7 @@ import plotly.express as px
 import kagglehub
 from os.path import join as path_join
 import seaborn as sns
+from scipy.stats import zscore
 
 # %%
 data_root = kagglehub.dataset_download("andrewkronser/cve-common-vulnerabilities-and-exposures")
@@ -54,6 +56,8 @@ for ordinal_column in ordinal_remapping:
 
 missing_counts = df.isnull().sum()
 print("Missing Data Count:\n", missing_counts)
+
+
 
 # %%
 ## 📐 3. Probability Distribution & Descriptive Stats
@@ -183,5 +187,30 @@ plt.show()
 
 
 # %%
-### 📦 4.3 Outliers in Boxplots
+### 📦 4.3 Detect, Report, and Visualize Outliers Using Z-Score
+
+# Detect, Report, and Visualize Outliers Using Z-Score
+
+def visualize_outliers(df, threshold=3):
+    df_numeric = df.select_dtypes(include=['number'])
+
+    # Calculate Z-scores
+    z_scores = df_numeric.apply(zscore, nan_policy='omit')
+
+    # Count how many values are considered outliers
+    outlier_counts = (z_scores.abs() > threshold).sum()
+    print("Number of outliers detected per column:\n", outlier_counts)
+
+    # Summary statistics
+    print("\n--- Summary Statistics ---")
+    display(df_numeric.describe().T)
+
+    # Boxplot visualization
+    print("\n Boxplots to Inspect Outliers:")
+    df_numeric.plot(kind='box', subplots=True, layout=(1, len(df_numeric.columns)), figsize=(16, 4), patch_artist=True)
+    plt.tight_layout()
+    plt.show()
+
+# Apply outlier visualization
+visualize_outliers(df)
 
