@@ -54,8 +54,9 @@ for ordinal_column in ordinal_remapping:
 missing_counts = df.isnull().sum()
 print("Missing Data Count:\n", missing_counts)
 
-## **3. Probability Distribution & Descriptive Stats**
-### 🎯 Expected Value (Mean)
+# %%
+## 📐 3. Probability Distribution & Descriptive Stats
+
 
 # The McCumber Cube is a model framework created by John McCumber in 1991 to
 # help organizations establish and evaluate information security initiatives
@@ -65,12 +66,9 @@ print("Missing Data Count:\n", missing_counts)
 # 1.availability, 2.integrity, 3.Confidentiality ✅
 # The protection of information in each of its possible states.
 # The security measures used to protect data.
-#
 
-# %%
-## 📐 3. Basic Statistics
 
-### **3.1 Minimum and Maximum Values**
+### 3.1 Minimum and Maximum Values
 
 # Min and Max of DataFrame columns
 print("Minimum values in each column:")
@@ -81,7 +79,7 @@ print(df.max(numeric_only=True))
 
 
 # %%
-### **3.2 Geometric Mean**
+### 3.2 Geometric Mean
 # Calculate the geometric mean of cvss
 geometric_mean_cvss = stats.gmean(df["cvss"].dropna())
 print(f"\nGeometric Mean of cvss: {geometric_mean_cvss:.2f}")
@@ -89,8 +87,6 @@ print(f"\nGeometric Mean of cvss: {geometric_mean_cvss:.2f}")
 # Calculate the geometric mean of cwe_code
 geometric_mean_cwe_code = stats.gmean(df["cwe_code"].dropna())
 print(f"\nGeometric Mean of cwe_code: {geometric_mean_cwe_code:.2f}")
-
-
 
 
 # %%
@@ -127,6 +123,7 @@ plt.figure(figsize=(8, 5))
 sns.boxplot(x=df["impact_confidentiality"])
 plt.title("Boxplot of Confidentiality Distribution")
 plt.show()
+
 
 # %%
 # ## 📊 4.Visualising Relationships
@@ -166,6 +163,22 @@ plt.show()
 # - The histogram is asymmetric and slightly skewed, suggesting that the distribution is not perfectly normal.
 # - There's a wide spread in the values, ranging from slightly below 15000 to above 40000.
 
+
 # %%
-### 📦 4.2 Outliers in Boxplots
+## 📊 4.2 Poisson distribution
+
+# Estimate the mean of access_complexity
+lambda_value = df["access_complexity"].mean()
+
+# Generate Poisson distribution
+poisson_data = np.random.poisson(lam=lambda_value, size=1000)
+
+# Plot distribution
+sns.histplot(poisson_data, kde=True, bins=30, color="blue")
+plt.title("Poisson Distribution of access_complexity")
+plt.xlabel("access_complexity")
+plt.ylabel("Frequency")
+plt.show()
+# %%
+### 📦 4.3 Outliers in Boxplots
 
