@@ -220,3 +220,30 @@ def visualize_outliers(df, threshold=3):
 # Apply outlier visualization
 visualize_outliers(df)
 
+# %%
+## 🔗 5. Analysing Correlation Between Variables
+# Calculate correlation matrices using different methods:
+
+df_clean = df.dropna()
+pearson_corr = df_clean.corr(method='pearson') # - Pearson: linear correlation (assumes normality)
+spearman_corr = df_clean.corr(method='spearman') # - Spearman: rank-based correlation (monotonic relationships)
+kendall_corr = df_clean.corr(method='kendall') # - Kendall: rank correlation (more robust with small samples or ties)
+
+# Display the correlation matrices
+print("\nPearson Correlation:")
+print(pearson_corr)
+
+print("\nSpearman Correlation:")
+print(spearman_corr)
+
+print("\nKendall Correlation:")
+print(kendall_corr)
+
+plt.figure(figsize=(6, 4))
+sns.heatmap(pearson_corr, annot=True, cmap="coolwarm", center=0)
+
+# Add title
+plt.title("Pearson Correlation Heatmap")
+
+# Show plot
+plt.show()
