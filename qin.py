@@ -69,7 +69,8 @@ print("Missing Data Count:\n", missing_counts)
 
 # %%
 ## 📐 3. Basic Statistics
-## **3.1 Minimum and Maximum Values**
+
+### **3.1 Minimum and Maximum Values**
 
 # Min and Max of DataFrame columns
 print("Minimum values in each column:")
@@ -80,7 +81,7 @@ print(df.max(numeric_only=True))
 
 
 # %%
-## **4. Geometric Mean**
+### **3.2 Geometric Mean**
 # Calculate the geometric mean of cvss
 geometric_mean_cvss = stats.gmean(df["cvss"].dropna())
 print(f"\nGeometric Mean of cvss: {geometric_mean_cvss:.2f}")
@@ -93,14 +94,19 @@ print(f"\nGeometric Mean of cwe_code: {geometric_mean_cwe_code:.2f}")
 
 
 # %%
-# 4.1 Median
+### 3.3 Median and Mode
 
-# Calculate median BMI
-median_bmi = np.median(df["weight"] / ((df["height"] / 100) ** 2))
-print(f"Median BMI: {median_bmi:.2f}")
+# Calculate median impact_availability
+median_impact_availability = np.median(df["impact_availability"] / ((df["impact_availability"] / 100) ** 2))
+print(f"Median availability: {median_impact_availability:.2f}")
+
+# Calculate the mode of impact_integrity
+mode_impact_integrity = stats.mode(df["impact_integrity"], keepdims=True)
+print(f"Most Common integrity: {mode_impact_integrity.mode[0]}, Count: {mode_impact_integrity.count[0]}")
+
 
 # %%
-### 📈 Variance and Standard Deviation
+### 3.4 Variance and Standard Deviation
 
 
 ## 📊 4.Visualising Relationships
