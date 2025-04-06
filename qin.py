@@ -225,14 +225,14 @@ visualize_outliers(df)
 
 # Covariance Analysis
 
-# Calculate a 30-day rolling mean to smooth out short-term fluctuations
-df['rolling_mean'] = df['value'].rolling(window=30).mean()
+# Calculate a rolling mean to smooth out short-term fluctuations
+df['rolling_mean'] = df['access_authentication'].rolling(window=30).mean()
 
 # Remove rows with NaN values introduced by the rolling window
 df_clean = df.dropna()
 
 # Calculate the covariance matrix between the original values and their rolling mean
-cov_matrix = df_clean[['value', 'rolling_mean']].cov()
+cov_matrix = df_clean[['access_authentication', 'rolling_mean']].cov()
 
 # Display the covariance matrix
 print("\nCovariance Matrix:")
