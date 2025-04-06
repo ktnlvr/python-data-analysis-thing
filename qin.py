@@ -105,11 +105,31 @@ mode_impact_integrity = stats.mode(df["impact_integrity"], keepdims=True)
 print(f"Most Common integrity: {mode_impact_integrity.mode[0]}, Count: {mode_impact_integrity.count[0]}")
 
 
+
 # %%
 ### 3.4 Variance and Standard Deviation
 
 
-## 📊 4.Visualising Relationships
+# %%
+### **3.5 Quantiles and Interquartile Range (IQR)**
+
+# Calculate Q1 (25th percentile), Q3 (75th percentile), and IQR for impact_confidentiality
+q1_confidentiality = df["impact_confidentiality"].quantile(0.25)
+q3_confidentiality = df["impact_confidentiality"].quantile(0.75)
+iqr_confidentiality = q3_confidentiality - q1_confidentiality
+
+print(f"Q1 (25th percentile of confidentiality): {q1_confidentiality:.2f}")
+print(f"Q3 (75th percentile of confidentiality): {q3_confidentiality:.2f}")
+print(f"Interquartile Range (IQR) of confidentiality: {iqr_confidentiality:.2f}")
+
+# Visualize IQR using a boxplot
+plt.figure(figsize=(8, 5))
+sns.boxplot(x=df["impact_confidentiality"])
+plt.title("Boxplot of Confidentiality Distribution")
+plt.show()
+
+# %%
+# ## 📊 4.Visualising Relationships
 
 ### 📊 4.1 Distribution Shapes
 
