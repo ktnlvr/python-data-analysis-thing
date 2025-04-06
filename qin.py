@@ -6,6 +6,7 @@ import numpy as np
 import plotly.express as px
 import kagglehub
 from os.path import join as path_join
+import seaborn as sns
 
 # %%
 data_root = kagglehub.dataset_download("andrewkronser/cve-common-vulnerabilities-and-exposures")
@@ -179,6 +180,8 @@ plt.title("Poisson Distribution of access_complexity")
 plt.xlabel("access_complexity")
 plt.ylabel("Frequency")
 plt.show()
+
+
 # %%
 ### 📦 4.3 Outliers in Boxplots
 
