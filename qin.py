@@ -31,7 +31,13 @@ df = pd.read_csv(path_join(data_root, 'cve.csv'), header=0, index_col=0)
 df.mod_date = pd.to_datetime(df.mod_date)
 df.pub_date = pd.to_datetime(df.pub_date)
 
-df.info() 
+# Dataset summary
+print("\nDataset Info:")
+df.info()
+
+print("\nSummary Statistics:")
+print(df.describe())
+
 non_par_com = {"NONE": 0, "COMPLETE": 2, "PARTIAL": 1}
 low_med_hih = {"LOW": 0, "MEDIUM": 1, "HIGH": 2}
 non_sin_mul = {"NONE": 0, "SINGLE": 1, "MULTIPLE": 2}
