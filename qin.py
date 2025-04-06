@@ -48,7 +48,7 @@ for ordinal_column in ordinal_remapping:
         lambda v: ordinal_remapping[ordinal_column].get(v, v)
     )
 
-
+# %%
 ## 🧼 2. Handling Missing Data
 
 missing_counts = df.isnull().sum()
@@ -67,6 +67,10 @@ print("Missing Data Count:\n", missing_counts)
 # The security measures used to protect data.
 #
 
+# %%
+## 📐 3. Basic Statistics
+## **3.1 Minimum and Maximum Values**
+
 # Min and Max of DataFrame columns
 print("Minimum values in each column:")
 print(df.min(numeric_only=True))
@@ -74,7 +78,9 @@ print(df.min(numeric_only=True))
 print("\nMaximum values in each column:")
 print(df.max(numeric_only=True))
 
-# Geometric Mean
+
+# %%
+## **4. Geometric Mean**
 # Calculate the geometric mean of cvss
 geometric_mean_cvss = stats.gmean(df["cvss"].dropna())
 print(f"\nGeometric Mean of cvss: {geometric_mean_cvss:.2f}")
@@ -84,14 +90,14 @@ geometric_mean_cwe_code = stats.gmean(df["cwe_code"].dropna())
 print(f"\nGeometric Mean of cwe_code: {geometric_mean_cwe_code:.2f}")
 
 
+
+
 # %%
+# 4.1 Median
 
-# Min and Max of DataFrame columns
-print("Minimum values in each column:")
-print(df.min(numeric_only=True))
-
-print("\nMaximum values in each column:")
-print(df.max(numeric_only=True))
+# Calculate median BMI
+median_bmi = np.median(df["weight"] / ((df["height"] / 100) ** 2))
+print(f"Median BMI: {median_bmi:.2f}")
 
 # %%
 ### 📈 Variance and Standard Deviation
@@ -134,5 +140,6 @@ plt.show()
 # - The histogram is asymmetric and slightly skewed, suggesting that the distribution is not perfectly normal.
 # - There's a wide spread in the values, ranging from slightly below 15000 to above 40000.
 
-
+# %%
 ### 📦 4.2 Outliers in Boxplots
+
