@@ -14,7 +14,7 @@ data_root = kagglehub.dataset_download("andrewkronser/cve-common-vulnerabilities
 ## 📌 1. Loading the Dataset
 
 # >## 💡 **Interpretation**:
-# -   **mod_date: The date the entry was last modified.**
+# -  **mod_date: The date the entry was last modified.**
 # -  **pub_date: The date the entry was published.**
 # -  **cvss: Common Vulnerability Scoring System (CVSS) score, a measure of the severity of a vulnerability.**
 # -  **cwe_code: Common Weakness Enumeration (CWE) code, identifying the type of weakness.**
@@ -111,7 +111,7 @@ print(f"Most Common integrity: {mode_impact_integrity.mode[0]}, Count: {mode_imp
 
 
 # %%
-### **3.5 Quantiles and Interquartile Range (IQR)**
+### 3.5 Quantiles and Interquartile Range (IQR)
 
 # Calculate Q1 (25th percentile), Q3 (75th percentile), and IQR for impact_confidentiality
 q1_confidentiality = df["impact_confidentiality"].quantile(0.25)
