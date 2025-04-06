@@ -1,14 +1,15 @@
 # %%
+from os.path import join as path_join
+
+import kagglehub
+import numpy as np
 import pandas as pd
+import seaborn as sns
 from holoviews.ipython import display
 from matplotlib import pyplot as plt
 from scipy import stats
-import numpy as np
-import plotly.express as px
-import kagglehub
-from os.path import join as path_join
-import seaborn as sns
 from scipy.stats import zscore
+from dataset import df
 
 # %%
 data_root = kagglehub.dataset_download("andrewkronser/cve-common-vulnerabilities-and-exposures")
@@ -27,7 +28,7 @@ data_root = kagglehub.dataset_download("andrewkronser/cve-common-vulnerabilities
 # -  **access_complexity: how difficult it is to execute.**
 # -  **access_vector: how the attack is performed, aka via network or locally.**
 
-df = pd.read_csv(path_join(data_root, 'cve.csv'), header=0, index_col=0)
+# df = pd.read_csv(path_join(data_root, 'cve.csv'), header=0, index_col=0)
 df.mod_date = pd.to_datetime(df.mod_date)
 df.pub_date = pd.to_datetime(df.pub_date)
 
@@ -249,27 +250,5 @@ plt.title("Covariance Matrix Heatmap")
 plt.show()
 
 
-# Calculate correlation matrices using different methods:
+# %%
 
-pearson_corr = df_clean.corr(method='pearson') # - Pearson: linear correlation (assumes normality)
-spearman_corr = df_clean.corr(method='spearman') # - Spearman: rank-based correlation (monotonic relationships)
-kendall_corr = df_clean.corr(method='kendall') # - Kendall: rank correlation (more robust with small samples or ties)
-
-# Display the correlation matrices
-print("\nPearson Correlation:")
-print(pearson_corr)
-
-print("\nSpearman Correlation:")
-print(spearman_corr)
-
-print("\nKendall Correlation:")
-print(kendall_corr)
-
-plt.figure(figsize=(6, 4))
-sns.heatmap(pearson_corr, annot=True, cmap="coolwarm", center=0)
-
-# Add title
-plt.title("Pearson Correlation Heatmap")
-
-# Show plot
-plt.show()
